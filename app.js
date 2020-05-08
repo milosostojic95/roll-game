@@ -36,9 +36,17 @@ function roll() {
 }
 
 function hold() {
+  //add globac score
   scores[activePlayer] += roundScore;
   document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
-  nextPlayer();
+  // check winner
+  if(scores[activePlayer] >= 100) {
+    document.querySelector('#name-'+ activePlayer).textContent = 'Player' + (activePlayer + 1) + 'Won!';
+  } else {
+    //changing player
+    nextPlayer();
+  }
+
 }
 
 function nextPlayer() {
