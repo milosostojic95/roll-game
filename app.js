@@ -14,9 +14,7 @@ document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0';
 
-
 // functions
-
 function roll() {
   // taking random number
   const dice = Math.floor(Math.random() * 6) + 1;
@@ -41,7 +39,11 @@ function hold() {
   document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
   // check winner
   if(scores[activePlayer] >= 100) {
-    document.querySelector('#name-'+ activePlayer).textContent = 'Player' + (activePlayer + 1) + 'Won!';
+    document.querySelector('#name-'+ activePlayer).textContent = 'Player ' + (activePlayer + 1) + ' Won!';
+    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    btnRoll.style.pointerEvents = 'none';
   } else {
     //changing player
     nextPlayer();
