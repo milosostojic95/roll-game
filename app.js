@@ -31,19 +31,21 @@ function roll() {
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
   } else {
     // next player
-    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-    roundScore = 0;
-    document.getElementById('current-0').textContent = '0';
-    document.getElementById('current-1').textContent = '0';
-    document.querySelector('.player-' + activePlayer + '-panel').classList.add('active');
+    nextPlayer();
   }
 }
 
 function hold() {
-  document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
   scores[activePlayer] += roundScore;
-  roundScore = 0;
+  document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
+  nextPlayer();
+}
+
+function nextPlayer() {
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-  document.querySelector('.player-' + activePlayer + '-panel').classList.add('active');
+  roundScore = 0;
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+  document.querySelector('.player-0-panel').classList.toggle('active');
+  document.querySelector('.player-1-panel').classList.toggle('active');
 }
