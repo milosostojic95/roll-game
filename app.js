@@ -1,11 +1,14 @@
 const btnRoll = document.querySelector('.btn-roll');
 const btnHold = document.querySelector('.btn-hold');
+const newGameBtn = document.querySelector('.btn-new');
 let activePlayer = 0;
 const scores = [0,0];
 let roundScore = 0;
 
+// events
 btnRoll.addEventListener('click', roll);
 btnHold.addEventListener('click', hold);
+newGameBtn.addEventListener('click', reset);
 
 //reset values
 document.querySelector('.dice').style.display = 'none';
@@ -39,7 +42,7 @@ function hold() {
   document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
   // check winner
   if(scores[activePlayer] >= 100) {
-    document.querySelector('#name-'+ activePlayer).textContent = 'Player ' + (activePlayer + 1) + ' Won!';
+    document.querySelector('#name-'+ activePlayer).textContent = 'Player ' + (activePlayer + 1) + ' WINNER!';
     document.querySelector('.dice').style.display = 'none';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
@@ -58,4 +61,8 @@ function nextPlayer() {
   document.getElementById('current-1').textContent = '0';
   document.querySelector('.player-0-panel').classList.toggle('active');
   document.querySelector('.player-1-panel').classList.toggle('active');
+}
+
+function reset() {
+
 }
