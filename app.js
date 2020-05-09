@@ -42,6 +42,7 @@ function hold() {
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
     btnRoll.style.pointerEvents = 'none';
+    btnHold.style.pointerEvents = 'none';
   } else {
     //changing player
     nextPlayer();
@@ -62,7 +63,6 @@ function init() {
   activePlayer = 0;
   scores = [0,0];
   roundScore = 0;
-
   //reset values
   document.querySelector('.dice').style.display = 'none';
   document.getElementById('score-0').textContent = '0';
@@ -72,6 +72,7 @@ function init() {
   document.getElementById('name-0').textContent = 'Player 1';
   document.getElementById('name-1').textContent = 'Player 2';
   btnRoll.style.pointerEvents = 'all';
+  btnHold.style.pointerEvents = 'all';
   document.querySelector('.player-0-panel').classList.remove('winner');
   document.querySelector('.player-1-panel').classList.remove('winner');
   document.querySelector('.player-0-panel').classList.add('active');
