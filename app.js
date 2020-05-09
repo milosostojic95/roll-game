@@ -109,3 +109,4 @@ function removeDice() {
   document.querySelector('#dice-1').style.display = 'none';
   document.querySelector('#dice-2').style.display = 'none';
 }
+
