@@ -1,9 +1,11 @@
 const btnRoll = document.querySelector('.btn-roll');
 const btnHold = document.querySelector('.btn-hold');
 const newGameBtn = document.querySelector('.btn-new');
+let winningValue;
 let activePlayer;
 let score;
 let roundScore;
+let lastDice;
 
 init();
 
@@ -21,7 +23,12 @@ function roll() {
   diceImg.style.display = 'block';
   diceImg.src = 'dice-' + dice + '.png';
   //reset roll if roll = 1
-  if(dice > 1) {
+
+  if(dice === 6 && lastDice === 6) {
+    scores[activePlayer] = 0;
+    document.querySelector('#score-'+activePlayer).textContent = '0';
+    nextPlayer();
+  } else if(dice > 1) {
     // add score
     roundScore += dice;
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
@@ -29,6 +36,10 @@ function roll() {
     // next player
     nextPlayer();
   }
+  lastDice = dice;
+  winningValue = document.querySelector('.final-score').value;
+  console.log(winningValue)
+
 }
 
 function hold() {
@@ -36,7 +47,7 @@ function hold() {
   scores[activePlayer] += roundScore;
   document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
   // check winner
-  if(scores[activePlayer] >= 10) {
+  if(scores[activePlayer] >= winningValue) {
     document.querySelector('#name-'+ activePlayer).textContent = 'Player ' + (activePlayer + 1) + ' WINNER!';
     document.querySelector('.dice').style.display = 'none';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
