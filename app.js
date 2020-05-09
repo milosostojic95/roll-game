@@ -1,7 +1,8 @@
 const btnRoll = document.querySelector('.btn-roll');
 const btnHold = document.querySelector('.btn-hold');
 const newGameBtn = document.querySelector('.btn-new');
-let winningValue;
+let input;
+let winningScore;
 let activePlayer;
 let score;
 let roundScore;
@@ -37,9 +38,6 @@ function roll() {
     nextPlayer();
   }
   lastDice = dice;
-  winningValue = document.querySelector('.final-score').value;
-  console.log(winningValue)
-
 }
 
 function hold() {
@@ -47,7 +45,15 @@ function hold() {
   scores[activePlayer] += roundScore;
   document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
   // check winner
-  if(scores[activePlayer] >= winningValue) {
+  input = document.querySelector('.final-score').value;
+
+  if(input) {
+    winningScore = input;
+  } else {
+    winningScore = 10;
+  }
+
+  if(scores[activePlayer] >= winningScore) {
     document.querySelector('#name-'+ activePlayer).textContent = 'Player ' + (activePlayer + 1) + ' WINNER!';
     document.querySelector('.dice').style.display = 'none';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
