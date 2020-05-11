@@ -1,6 +1,16 @@
 const btnRoll = document.querySelector('.btn-roll');
 const btnHold = document.querySelector('.btn-hold');
 const newGameBtn = document.querySelector('.btn-new');
+const diceImgOne = document.querySelector('#dice-1');
+const diceImgTwo = document.querySelector('#dice-2');
+const currentOne = document.querySelector('#current-0');
+const currentTwo = document.querySelector('#current-1');
+const panelOne = document.querySelector('.player-0-panel');
+const panelTwo = document.querySelector('.player-1-panel');
+const nameOne =  document.getElementById('name-0');
+const nameTwo =  document.getElementById('name-1');
+const scoreOne = document.getElementById('score-0');
+const scoreTwo = document.getElementById('score-1');
 let input;
 let winningScore;
 let activePlayer;
@@ -20,9 +30,6 @@ function roll() {
   // taking random number
   const diceOne = Math.floor(Math.random() * 6) + 1;
   const diceTwo = Math.floor(Math.random() * 6) + 1;
-  // changing img of roll
-  const diceImgOne = document.querySelector('#dice-1');
-  const diceImgTwo = document.querySelector('#dice-2');
 
   //set first img
   diceImgOne.style.display = 'block';
@@ -31,7 +38,7 @@ function roll() {
   diceImgTwo.style.display = 'block';
   diceImgTwo.src = 'dice-' + diceTwo + '.png';
   //reset roll if roll = 1
-  if(diceOne === 6 && lastDiceOne === 6 || diceTwo === 6 && lastDiceTwo === 6 || diceOne ===6 && diceTwo === 6) {
+  if( diceOne === 6 && lastDiceOne === 6 || diceTwo === 6 && lastDiceTwo === 6 || diceOne === 6 && diceTwo === 6 ) {
     scores[activePlayer] = 0;
     document.querySelector('#score-'+activePlayer).textContent = '0';
     nextPlayer();
@@ -78,10 +85,10 @@ function hold() {
 function nextPlayer() {
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
   roundScore = 0;
-  document.getElementById('current-0').textContent = '0';
-  document.getElementById('current-1').textContent = '0';
-  document.querySelector('.player-0-panel').classList.toggle('active');
-  document.querySelector('.player-1-panel').classList.toggle('active');
+  currentOne.textContent = '0';
+  currentTwo.textContent = '0';
+  panelOne.classList.toggle('active');
+  panelTwo.classList.toggle('active');
   lastDiceOne = 0;
   lastDiceTwo = 0;
 }
@@ -92,21 +99,23 @@ function init() {
   roundScore = 0;
   //reset values
   removeDice();
-  document.getElementById('score-0').textContent = '0';
-  document.getElementById('score-1').textContent = '0';
-  document.getElementById('current-0').textContent = '0';
-  document.getElementById('current-1').textContent = '0';
-  document.getElementById('name-0').textContent = 'Player 1';
-  document.getElementById('name-1').textContent = 'Player 2';
+  scoreOne.textContent = '0';
+  scoreTwo.textContent = '0';
+  currentOne.textContent = '0';
+  currentTwo.textContent = '0';
+  nameOne.textContent = 'Player 1';
+  nameTwo.textContent = 'Player 2';
   btnRoll.style.pointerEvents = 'all';
   btnHold.style.pointerEvents = 'all';
-  document.querySelector('.player-0-panel').classList.remove('winner');
-  document.querySelector('.player-1-panel').classList.remove('winner');
-  document.querySelector('.player-0-panel').classList.add('active');
+  panelOne.classList.remove('winner');
+  panelTwo.classList.remove('winner');
+  panelOne.classList.remove('active');
+  panelTwo.classList.remove('active');
+  panelOne.classList.add('active');
 }
 
 function removeDice() {
-  document.querySelector('#dice-1').style.display = 'none';
-  document.querySelector('#dice-2').style.display = 'none';
+  diceImgOne.style.display = 'none';
+  diceImgTwo.style.display = 'none';
 }
 
